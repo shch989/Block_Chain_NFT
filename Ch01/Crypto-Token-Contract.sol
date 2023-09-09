@@ -10,6 +10,11 @@ contract CryptoToken {
 
     // 토큰 전송 이벤트 정의
     event Sent(address from, address to, uint amount);
+    
+    // 생성자: 계약을 배포한 사람을 토큰 발행자로 설정
+    constructor() {
+        minter = msg.sender;
+    }
 
     // 토큰을 발행하는 함수
     function mint(address receiver, uint amount) public {
@@ -28,10 +33,5 @@ contract CryptoToken {
 
         // 토큰 전송 이벤트를 발생시킴
         emit Sent(msg.sender, receiver, amount);
-    }
-
-    // 생성자: 계약을 배포한 사람을 토큰 발행자로 설정
-    constructor() {
-        minter = msg.sender;
     }
 }
